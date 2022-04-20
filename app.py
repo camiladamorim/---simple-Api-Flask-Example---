@@ -2,25 +2,32 @@
 # coding: utf-8
 
 from flask import Flask,jsonify,request, Response
-from services import *
+# import services
 import json
 
 app=Flask(__name__)
 
 @app.route("/")
-def pagPrincipal():
-    return(BackParaAPI())
+def main_page():
+    with open("receitas.json", "r") as read_file:
+        meuObj = json.load(read_file)
+    meuJSON=json.dumps(meuObj)
+    return(meuJSON)
 
 
 @app.route("/pag2")
-def pagReceita():
-    return(ReceitaExpandida())
+def recipe_page():
+    with open("receitas.json", "r") as read_file:
+        meuObj = json.load(read_file)
+    meuJSON=json.dumps(meuObj)
+    return("meuJSON")
 
 
 @app.route("/posted",methods=["POST"])
 def posted():
-    AttDB()
-    return Response(status=201)
+    data = request.get_json()
+    with open("receitas.json", "w") as write_file:
+        json.dump(data,write_file)
     #data = request.get_json()
     #name=data['name']
     #howToDo=data['howToDo']
