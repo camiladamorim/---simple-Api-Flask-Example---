@@ -2,5 +2,5 @@
 
 foods examples json file (post get)
 
-. sudo fuser -k 5000/tcp
-. flask run
+* sudo fuser -k 5000/tcp
+* flask run
